@@ -1,0 +1,86 @@
+paths:
+    /api/v1/library/{page}/{pageSize}:
+        get:
+            description: |-
+                @Summary Get songs from library
+                @Description Get songs from library with pagination
+                @Tags library
+                @Produce  json
+                @Param page path int false "Page number"
+                @Param pageSize path int false "Page size"
+                @Success 200 {object} SongsResponse
+                @Failure 400 {object} Error
+                @Failure 500 {object} Error
+                @Router /library/{page}/{pageSize} [get]
+            operationId: GetSongs
+            summary: Get songs from library
+            tags:
+                - library
+    /api/v1/song:
+        post:
+            description: |-
+                @Summary Create new song in library
+                @Description Create new song with given data
+                @Tags songs
+                @Accept  json
+                @Produce  json
+                @Param body body SongRequest true "Song details"
+                @Success 201 {object} SongResponse
+                @Failure 400 {object} Error
+                @Failure 500 {object} Error
+                @Router /song [post]
+            operationId: PostSong
+            summary: Post song to library
+            tags:
+                - song
+    /api/v1/song/{id}:
+        delete:
+            description: |-
+                @Summary Delete song by id
+                @Description Delete song with given id from library
+                @Tags songs
+                @Param id path int true "Song ID"
+                @Success 204 {object} DeleteResponse
+                @Failure 400 {object} Error
+                @Failure 404 {object} Error
+                @Router /song/{id} [delete]
+            operationId: DeleteSongsById
+            summary: Delete song by id
+            tags:
+                - song
+        put:
+            description: |-
+                @Summary Update song by id
+                @Description Update song details by given id
+                @Tags songs
+                @Accept  json
+                @Produce  json
+                @Param id path int true "Song ID"
+                @Param body body SongRequest true "Updated song details"
+                @Success 200 {object} SongResponse
+                @Failure 400 {object} Error
+                @Failure 404 {object} Error
+                @Router /song/{id} [put]
+            operationId: PutSongs
+            summary: Update song by id
+            tags:
+                - song
+    /api/v1/song/{id}/{page}/{pageSize}:
+        get:
+            description: |-
+                @Summary Get songs from library by id with pagination
+                @Description Get songs from library by id with pagination
+                @Tags library
+                @Produce  json
+                @Param id path int true "Song ID"
+                @Param page path int false "Page number"
+                @Param pageSize path int false "Page size"
+                @Success 200 {object} SongsResponse
+                @Failure 400 {object} Error
+                @Failure 404 {object} Error
+                @Router /song/{id}/{page}/{pageSize} [get]
+            operationId: GetSongsIdPart
+            summary: Get songs from library by id with pagination
+            tags:
+                - library
+swagger: "2.0"
